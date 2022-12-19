@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc"
 import { BsGithub } from "react-icons/bs"
 import spiceBg from "../../assets/pexels-spice.jpeg"
 import Link from "next/link"
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { GithubAuthProvider, signInWithPopup } from "firebase/auth"
 import { auth } from "../../utils/firebase"
 import { useRouter } from "next/router"
 import { useSignInWithGoogle } from "react-firebase-hooks/auth"
@@ -79,7 +79,17 @@ const LineSplit = styled.div`
 export default function Login() {
   const router = useRouter()
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth)
-  const googleProvider = new GoogleAuthProvider()
+
+  const ghProvider = new GithubAuthProvider()
+  const githubLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, ghProvider)
+      console.log(result)
+      router.push("/")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   if (user) router.push("/")
   return (
     <LoginCont>
@@ -88,7 +98,7 @@ export default function Login() {
         <p>login using one of these providers</p>
         <Icons>
           <FcGoogle onClick={() => signInWithGoogle()} />
-          <BsGithub />
+          <BsGithub onClick={() => githubLogin()} />
         </Icons>
         <LineSplit>
           <div></div>

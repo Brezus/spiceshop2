@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
 import { useRouter } from "next/router"
 import Link from "next/link"
@@ -25,7 +25,9 @@ const Navigation = styled.nav`
   right: 0;
   top: 3rem;
   display: flex;
-  justify-content: ${(props) => (props.details ? "start" : "space-around")};
+  justify-content: ${(props) => (props.details ? "start" : "space-between")};
+  flex-wrap: wrap;
+  gap: 1em;
   // border: ${(props) => (props.details ? "none" : "1px solid white;")};
   align-items: center;
   width: ${({ theme }) => theme.width};
@@ -35,11 +37,21 @@ const Navigation = styled.nav`
   font-family: ${({ theme }) => theme.ffM};
   z-index: 5;
 
+  a {
+    width: 100%;
+  }
+
 
   ul {
     display: flex;
     list-style: none;
     gap: 1em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-left: 0;
+    text-align: center;
 
     li {
       font-size: .8em;
@@ -52,6 +64,8 @@ const H1 = styled.h1`
   z-index: 2;
   color: ${(props) => (props.dark ? "black" : "white")};
   font-size: 1.1rem;
+  text-align: center;
+  width: 100%;
 `
 
 const Li = styled.li`
@@ -61,20 +75,74 @@ const Li = styled.li`
 const ProfileCont = styled.div`
   position: relative;
 `
+const ProfileActions = styled.div`
+  position: absolute;
+  left: -95%;
+  top: 105%;
+  transform: translate(-105%, -50%)
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  button {
+    width: 150px;
+  }
+`
 
 export default function Nav() {
   const [user, isLoading] = useAuthState(auth)
-  // console.log(user)
+  const [openProfile, setOpenProfile] = useState(false)
+  // const [selectedImage, setSelectedImage] = useState(null)
+  const profileRef = useRef()
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (
+        openProfile &&
+        profileRef.current &&
+        !profileRef.current.contains(e.target)
+      ) {
+        setOpenProfile(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [openProfile])
+  console.log(user)
   const { openCt, newItemAdded, newItemsQuant, cartItems, openCart } =
     useAppContext()
 
   const router = useRouter()
 
+  const toggleProfile = () => setOpenProfile((prev) => !prev)
+  const closeProfile = () => setOpenProfile(false)
+
   const userProfile = user && (
-    <ProfileCont>
-      <Profile />
-      <div>upload photo</div>
-      <p>sign out</p>
+    <ProfileCont onClick={toggleProfile} ref={profileRef}>
+      <Profile style={{ backgroundImage: `url(${user.photoURL})` }} />
+      {openProfile && (
+        <ProfileActions>
+          {/* <button>upload photo</button> */}
+          <input
+            onClick={() => console.log("clicked")}
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              console.log("fired")
+              setSelectedImage(event.target.files[0])
+            }}
+          />
+          <button onBlur={closeProfile} onClick={() => auth.signOut()}>
+            sign out
+          </button>
+        </ProfileActions>
+      )}
     </ProfileCont>
   )
 
@@ -94,24 +162,20 @@ export default function Nav() {
         <H1>feelin spicy</H1>
       </Link>
       <ul>
-        <Link href="#about-us">
-          <Li style={{ cursor: "pointer" }}>about us</Li>
-        </Link>
         <Link href="#spices">
-          <Li style={{ cursor: "pointer" }}>spices</Li>
+          <Li style={{ cursor: "pointer", paddingLeft: "0" }}>spices</Li>
         </Link>
-        {user ? (
-          <Li onClick={() => auth.signOut()} style={{ cursor: "pointer" }}>
-            sign-out
-          </Li>
-        ) : (
+        {!user && (
           <Link href="/auth/Login">
             <Li style={{ cursor: "pointer" }}>log-in</Li>
           </Link>
         )}
       </ul>
 
-      <CartCont onClick={openCt}>
+      <CartCont
+        style={{ margin: `${!user ? "0 auto" : "0"}` }}
+        onClick={openCt}
+      >
         <TiShoppingCart />
         {newItemAdded >= 1 && (
           <p>{newItemsQuant >= 99 ? newItemsQuant + "+" : newItemsQuant}</p>

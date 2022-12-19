@@ -8,6 +8,8 @@ import { RiDeleteBack2Line } from "react-icons/ri"
 import { nanoid } from "nanoid"
 import { urlFor } from "./client"
 import getStripe from "../utils/getStripe"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../utils/firebase"
 
 const appearOpac = keyframes`
   from {
@@ -46,6 +48,7 @@ const CartCont = styled.div`
   place-items: center;
   gap: 1rem;
   z-index: 6;
+  text-align: center;
   ${(props) =>
     props.empty &&
     css`
@@ -103,9 +106,10 @@ const Flex = styled.div`
 `
 
 export default function Cart({ items, allItems }) {
-  // console.log(items)
   const value = useAppContext()
   const { cartItems } = useAppContext()
+  const [user, isLoading] = useAuthState(auth)
+
   const handleCheckout = async () => {
     const stripe = await getStripe()
 
@@ -160,6 +164,7 @@ export default function Cart({ items, allItems }) {
     <Wrapper>
       {items?.length >= 1 ? (
         <CartCont>
+          <p>{user?.displayName}`&apos;`s cart</p>
           {cartItemsEls}
           <p>{value.totalPrice}</p>
           <button onClick={() => handleCheckout()}>pay</button>
@@ -167,7 +172,7 @@ export default function Cart({ items, allItems }) {
       ) : (
         <>
           <CartCont empty>
-            <p>It appears your cart is empty</p>
+            <p>{user?.displayName} It appears your cart is empty</p>
             <Button onClick={value.closeCt}>continue browsing</Button>
           </CartCont>
         </>

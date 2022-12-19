@@ -87,7 +87,7 @@ export default function Product({ spice }) {
             <ShoppingCart>
               <TiShoppingCart
                 onClick={(e) => {
-                  e.preventDefault()
+                  e.stopPropagation()
                   addToCart(spice, 1)
                 }}
                 style={{ color: "red" }}

@@ -166,7 +166,6 @@ export const CartCont = styled.div`
 `
 
 export const Profile = styled(CartCont)`
-  background-image: url(${blankProfile.src});
   background-size: cover;
   background-position: center top;
   margin-left: auto;
