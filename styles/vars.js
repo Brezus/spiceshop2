@@ -1,0 +1,17 @@
+export const vars = {
+  txtCol: "white",
+  width: "90%",
+  width8: "80%",
+  width7: "70%",
+  bRadius: "10px",
+  textColLight: "#fffffe",
+  bgColLight: "#eaebea",
+  bgColDLight: "#f5f4f4",
+  bgColDark: "#1b1b1c",
+  fsS: "0.7rem",
+  fsM: "1rem",
+  FsL: "1.4rem",
+  FsXL: "2rem",
+  ffM: "Raleway, sans-serif",
+  ffS: "Montserrat, sans-serif",
+}
