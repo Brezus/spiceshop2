@@ -25,7 +25,8 @@ const Navigation = styled.nav`
   right: 0;
   top: 3rem;
   display: flex;
-  justify-content: ${(props) => (props.details ? "start" : "space-between")};
+  // justify-content: ${(props) => (props.details ? "start" : "space-between")};
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 1em;
   // border: ${(props) => (props.details ? "none" : "1px solid white;")};
@@ -38,7 +39,7 @@ const Navigation = styled.nav`
   z-index: 5;
 
   a {
-    width: 100%;
+    width: ${(props) => (props.details ? "initial" : "100%")};
   }
 
 
@@ -128,16 +129,14 @@ export default function Nav() {
       <Profile style={{ backgroundImage: `url(${user.photoURL})` }} />
       {openProfile && (
         <ProfileActions>
-          {/* <button>upload photo</button> */}
-          <input
-            onClick={() => console.log("clicked")}
+          {/* <input
             type="file"
             name="myImage"
             onChange={(event) => {
               console.log("fired")
               setSelectedImage(event.target.files[0])
             }}
-          />
+          /> */}
           <button onBlur={closeProfile} onClick={() => auth.signOut()}>
             sign out
           </button>
@@ -192,6 +191,11 @@ export default function Nav() {
           <TiChevronLeft style={chevronStyles} />
         </div>
       </Link>
+      {!user && (
+        <Link href="/auth/Login">
+          <p style={{ cursor: "pointer", color: "black" }}>log-in</p>
+        </Link>
+      )}
       {userProfile}
     </Navigation>
   )

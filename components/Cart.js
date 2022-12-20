@@ -48,12 +48,12 @@ const CartCont = styled.div`
   place-items: center;
   gap: 1rem;
   z-index: 6;
-  text-align: center;
   ${(props) =>
     props.empty &&
     css`
       grid-template-rows: 5px 50px;
       place-content: center;
+      text-align: center;
     `}
 
   h3 {
@@ -164,7 +164,7 @@ export default function Cart({ items, allItems }) {
     <Wrapper>
       {items?.length >= 1 ? (
         <CartCont>
-          <p>{user?.displayName}`&apos;`s cart</p>
+          <p style={{ opacity: "0.7", letterSpacing: '3px' }}>{user?.displayName}`&apos;`s cart</p>
           {cartItemsEls}
           <p>{value.totalPrice}</p>
           <button onClick={() => handleCheckout()}>pay</button>

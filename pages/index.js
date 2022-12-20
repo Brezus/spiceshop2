@@ -31,7 +31,7 @@ export default function Home({ spiceProducts }) {
     .filter((product) => !product.winterSpice)
     .map((prod) => <Product key={prod?._id} spice={prod} />)
 
-  // const addToCartDb = ref(database, 'cartItems/' + postId + '/starCount')
+  // const addToCartDb = ref(database, 'cartItems/' + user.uid + '/starCount')
   return (
     <>
       <Head>
@@ -39,7 +39,7 @@ export default function Home({ spiceProducts }) {
       </Head>
       <Hero />
       <About />
-      <div id="spices">
+      <div style={{ padding: "4em 0 6em" }} id="spices">
         <H2>Our Collection</H2>
         <Items>{winterProducts}</Items>
         <Items>{summerProducts}</Items>
