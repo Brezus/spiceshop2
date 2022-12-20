@@ -19,9 +19,14 @@ export const Button = styled.button`
   border: none;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  max-width: 304px;
+  display: inline-block;
 
   &:active {
     transform: scale(0.9);
+  }
+
+  @media (min-width: 768px) {
   }
 `
 export const VolumeCont = styled.div`
@@ -31,6 +36,7 @@ export const VolumeCont = styled.div`
 
 export const VolumeBtns = styled(Button)`
   flex: 1;
+  max-width: 150px;
 `
 export const Quant = styled.p`
   padding: 0.5em 1.5em;
@@ -43,6 +49,12 @@ export const ButtonsCont = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+
+  @media (min-width: 768px) {
+    width: 60%;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
 `
 
 export const ImgCont = styled.figure``
@@ -50,7 +62,7 @@ export const InfoCont = styled.main`
   font-family: ${({ theme }) => theme.ffS};
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 1.5em;
 
   @media (min-width: 768px) {
     flex: 1;
