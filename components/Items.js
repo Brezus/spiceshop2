@@ -18,6 +18,10 @@ const ItemsCont = styled.div`
   width: ${({ theme }) => theme.width8};
   margin-inline: auto;
   text-align: center;
+ 
+}
+
+
 `
 
 export default function Items({ holiday, children }) {

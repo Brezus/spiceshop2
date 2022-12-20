@@ -42,6 +42,7 @@ export default function Home({ spiceProducts }) {
       <div style={{ padding: "4em 0 6em" }} id="spices">
         <H2>Our Collection</H2>
         <Items>{winterProducts}</Items>
+        <hr style={{ width: "80%", marginTop: "4em" }} />
         <Items>{summerProducts}</Items>
       </div>
       {openCart && <Cart items={cartItems} />}

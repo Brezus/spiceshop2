@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { TiChevronLeft } from "react-icons/ti"
-import { CartCont, Profile } from "../styles/spiceStyles"
+import { Profile } from "../styles/spiceStyles"
 import { TiShoppingCart } from "react-icons/ti"
 import { useAppContext } from "../context/ShoppingCartContext"
 import Cart from "./Cart"
@@ -37,26 +37,32 @@ const Navigation = styled.nav`
   border-radius: ${({ theme }) => theme.bRadius};
   font-family: ${({ theme }) => theme.ffM};
   z-index: 5;
+  }
+`
+const Ul = styled.ul`
+  display: flex;
+  list-style: none;
+  gap: 1em;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding-left: 0;
+  text-align: center;
+  list-style: none;
 
-  a {
-    width: ${(props) => (props.details ? "initial" : "100%")};
+  li {
+    font-size: 0.8em;
   }
 
-
-  ul {
-    display: flex;
-    list-style: none;
-    gap: 1em;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding-left: 0;
-    text-align: center;
-
-    li {
-      font-size: .8em;
-    }
+  @media (min-width: 768px) {
+    width: auto;
+  }
+`
+const Atag = styled(Link)`
+  width: ${(props) => (props.details ? "initial" : "100%")};
+  @media (min-width: 768px) {
+    width: auto;
   }
 `
 
@@ -89,6 +95,42 @@ const ProfileActions = styled.div`
 
   button {
     width: 150px;
+  }
+`
+const CartCont = styled.div`
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  box-shadow: rgba(17, 12, 46, 0.2) 0px 0px 10px 0px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
+  margin: ${(props) => (props.user ? "0" : "0 auto")};
+
+  svg {
+    font-size: 1.8rem;
+    color: gray;
+  }
+
+  p {
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: red;
+    border-radius: 50%;
+    width: 26px;
+    line-height: 26px;
+    text-align: center;
+    font-size: 0.8em;
+  }
+
+  @media (min-width: 768px) {
+    margin: 0;
   }
 `
 
@@ -157,10 +199,10 @@ export default function Nav() {
 
   const homeNavigation = (
     <Navigation>
-      <Link href={"/"}>
+      <Atag href={"/"}>
         <H1>feelin spicy</H1>
-      </Link>
-      <ul>
+      </Atag>
+      <Ul>
         <Link href="#spices">
           <Li style={{ cursor: "pointer", paddingLeft: "0" }}>spices</Li>
         </Link>
@@ -169,12 +211,9 @@ export default function Nav() {
             <Li style={{ cursor: "pointer" }}>log-in</Li>
           </Link>
         )}
-      </ul>
+      </Ul>
 
-      <CartCont
-        style={{ margin: `${!user ? "0 auto" : "0"}` }}
-        onClick={openCt}
-      >
+      <CartCont user={user} onClick={openCt}>
         <TiShoppingCart />
         {newItemAdded >= 1 && (
           <p>{newItemsQuant >= 99 ? newItemsQuant + "+" : newItemsQuant}</p>

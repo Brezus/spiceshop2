@@ -105,10 +105,7 @@ export default function Login() {
       console.log(error)
     }
   }
-  if (user) {
-    router.back()
-    console.log("it works")
-  }
+
   return (
     <LoginCont>
       <LoginMain>

@@ -27,9 +27,6 @@ export const Button = styled.button`
 export const VolumeCont = styled.div`
   display flex;
   justify-content: space-between;
-  
-
-  
 `
 
 export const VolumeBtns = styled(Button)`
@@ -54,6 +51,12 @@ export const InfoCont = styled.main`
   display: flex;
   flex-direction: column;
   gap: 1em;
+
+  @media (min-width: 768px) {
+    flex: 1;
+    padding: 3em 2em;
+    background: white;
+  }
 `
 export const SmallDetailsP = styled.p`
   font-family: ${({ theme }) => theme.ffM};
@@ -95,12 +98,18 @@ export const DetailsCont = styled.article`
     rgba(245, 245, 245, 1) 0%,
     rgba(215, 215, 215, 1) 100%
   );
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: 0;
+  }
 `
 
 export const StyledCarouselProv = styled(CarouselProvider)`
   position: relative;
   display: flex;
   align-items: center;
+  height: 100vh;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     63deg,
@@ -116,6 +125,12 @@ export const StyledCarouselProv = styled(CarouselProvider)`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    background: none;
+    box-shadow: none;
+    flex: 1;
   }
 `
 export const StyledSlider = styled(Slider)`
@@ -166,6 +181,7 @@ export const CartCont = styled.div`
 `
 
 export const Profile = styled(CartCont)`
+  background-image: url(${blankProfile.src});
   background-size: cover;
   background-position: center top;
   margin-left: auto;

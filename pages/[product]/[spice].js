@@ -78,6 +78,12 @@ export default function ProductDetails({ selectedSpice, products }) {
               </VolumeBtns>
             </VolumeCont>
           </ButtonsCont>
+          <CartCont onClick={openCt}>
+            <TiShoppingCart />
+            {newItemAdded >= 1 && (
+              <p>{newItemsQuant >= 99 ? newItemsQuant + "+" : newItemsQuant}</p>
+            )}
+          </CartCont>
         </InfoCont>
         <CartCont onClick={openCt}>
           <TiShoppingCart />
