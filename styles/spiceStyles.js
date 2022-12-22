@@ -19,7 +19,6 @@ export const Button = styled.button`
   border: none;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  max-width: 304px;
   display: inline-block;
 
   &:active {
@@ -35,8 +34,7 @@ export const VolumeCont = styled.div`
 `
 
 export const VolumeBtns = styled(Button)`
-  flex: 1;
-  max-width: 150px;
+  flex: 2;
 `
 export const Quant = styled.p`
   padding: 0.5em 1.5em;
@@ -49,6 +47,7 @@ export const ButtonsCont = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+  margin-bottom: 1em;
 
   @media (min-width: 768px) {
     width: 60%;
@@ -63,6 +62,8 @@ export const InfoCont = styled.main`
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+  justify-content: center;
+  position: relative;
 
   @media (min-width: 768px) {
     flex: 1;
@@ -77,7 +78,16 @@ export const SmallDetailsP = styled.p`
   letter-spacing: 5px;
   text-transform: uppercase;
   color: white;
+  opacity: 0.8;
   text-shadow: 0px 3px 20px black;
+
+  @media (min-width: 768px) {
+    text-shadow: 5px 3px 14px black;
+    position: absolute;
+    left: -91%;
+    bottom: 3%;
+    letter-spacing: 0;
+  }
 `
 export const DetailsP = styled.p`
   font-family: ${({ theme }) => theme.ffM};
@@ -90,12 +100,21 @@ export const PriceP = styled(SmallDetailsP)`
   font-size: 1.4rem;
   color: black;
   text-shadow: none;
+
+  @media (min-width: 768px) {
+    text-shadow: none;
+    position: initial;
+  }
 `
 
 export const NameP = styled.p`
   font-size: 2rem;
   font-family: ${({ theme }) => theme.ffM};
   font-weight: 800;
+
+  @media (min-width: 768px) {
+    font-size: 4rem;
+  }
 `
 export const DetailsCont = styled.article`
   color: black;
@@ -121,7 +140,8 @@ export const StyledCarouselProv = styled(CarouselProvider)`
   position: relative;
   display: flex;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
+  max-height: 500px;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     63deg,
@@ -143,6 +163,8 @@ export const StyledCarouselProv = styled(CarouselProvider)`
     background: none;
     box-shadow: none;
     flex: 1;
+    max-height: none;
+    min-height: 100vh;
   }
 `
 export const StyledSlider = styled(Slider)`
@@ -190,6 +212,10 @@ export const CartCont = styled.div`
     text-align: center;
     font-size: 0.8em;
   }
+
+  @media (min-width: 768px) {
+    margin-right: auto;
+  }
 `
 
 export const Profile = styled(CartCont)`
@@ -198,4 +224,8 @@ export const Profile = styled(CartCont)`
   background-position: center top;
   margin-left: auto;
   margin-right: 0.8em;
+
+  @media (min-width: 768px) {
+    margin-right: initial;
+  }
 `

@@ -88,7 +88,7 @@ export default function Login() {
 
   const googleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, ghProvider)
+      const result = await signInWithPopup(auth, goProvider)
       console.log(result)
       router.back()
     } catch (error) {
