@@ -87,6 +87,7 @@ export const SmallDetailsP = styled.p`
     left: -91%;
     bottom: 3%;
     letter-spacing: 0;
+    opacity: 0.8;
   }
 `
 export const DetailsP = styled.p`

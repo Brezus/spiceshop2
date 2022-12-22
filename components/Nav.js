@@ -73,10 +73,18 @@ const H1 = styled.h1`
   font-size: 1.1rem;
   text-align: center;
   width: 100%;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `
 
 const Li = styled.li`
   z-index: 2;
+
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+  }
 `
 
 const ProfileCont = styled.div`
