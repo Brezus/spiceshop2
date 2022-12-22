@@ -57,6 +57,10 @@ const Ul = styled.ul`
 
   @media (min-width: 768px) {
     width: auto;
+
+    li {
+      font-size: 1.2rem;
+    }
   }
 `
 const Atag = styled(Link)`
@@ -81,10 +85,6 @@ const H1 = styled.h1`
 
 const Li = styled.li`
   z-index: 2;
-
-  @media (min-width: 768px) {
-    font-size: 1.3rem;
-  }
 `
 
 const ProfileCont = styled.div`
