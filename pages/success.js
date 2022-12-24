@@ -14,7 +14,7 @@ const Main = styled.main`
   }
 `
 
-export default function success() {
+export default function Success() {
   useEffect(() => {
     localStorage.clear()
   }, [])
