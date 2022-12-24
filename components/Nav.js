@@ -165,7 +165,6 @@ export default function Nav() {
       document.removeEventListener("mousedown", checkIfClickedOutside)
     }
   }, [openProfile])
-  console.log(user)
   const { openCt, newItemAdded, newItemsQuant, cartItems, openCart } =
     useAppContext()
 

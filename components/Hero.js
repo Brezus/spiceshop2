@@ -79,7 +79,9 @@ export default function Hero() {
             Spice improves the natural flavor of cuisines and is used for
             medicinal purposes
           </p>
-          <Button>shop now</Button>
+          <Button>
+            <a href={"#spices"}>shop now</a>
+          </Button>
         </div>
       </HeroText>
     </HeroDiv>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { urlFor } from "./client"
 import Link from "next/link"
 import { nanoid } from "nanoid"
@@ -54,7 +54,12 @@ const ShoppingCart = styled.div`
   position: absolute;
   right: 25px;
   top: 10px;
-  display: none;
+  // display: none;
+  display: ${(props) => (props.inCartProp ? "block" : "none")};
+
+  ${StyledLink} & {
+    color: ${(props) => (props.inCartProp ? "yellow" : "red")};
+  }
 
   ${StyledLink}:hover & {
     display: block;
@@ -62,7 +67,12 @@ const ShoppingCart = styled.div`
 `
 
 export default function Product({ spice }) {
-  const { addToCart } = useAppContext()
+  const { addToCart, cartItems } = useAppContext()
+  const [inCart, setInCart] = useState(false)
+
+  useEffect(() => {
+    setInCart(cartItems.find((item) => (item._id === spice._id ? true : false)))
+  }, [cartItems])
 
   const stars = new Array(4)
     .fill(<TiStar />)
@@ -84,14 +94,15 @@ export default function Product({ spice }) {
               <TiStarOutline />
             </div>
             <p>${spice.price}</p>
-            <ShoppingCart>
+            <ShoppingCart inCartProp={inCart}>
               <TiShoppingCart
                 onClick={(e) => {
-                  if (e.defaultPrevented) return 
+                  if (e.defaultPrevented) return
                   e.preventDefault()
+                  // setInCart(true)
                   addToCart(spice, 1)
                 }}
-                style={{ color: "red" }}
+                style={{ color: `${inCart ? "green" : "red"}` }}
               />
             </ShoppingCart>
           </Info>

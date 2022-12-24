@@ -164,10 +164,14 @@ export default function Cart({ items, allItems }) {
     <Wrapper>
       {items?.length >= 1 ? (
         <CartCont>
-          <p style={{ opacity: "0.7", letterSpacing: '3px' }}>{user?.displayName}`&apos;`s cart</p>
+          <p style={{ opacity: "0.7", letterSpacing: "3px" }}>
+            {user ? user?.displayName + "'s cart" : "your cart"}
+          </p>
           {cartItemsEls}
-          <p>{value.totalPrice}</p>
-          <button onClick={() => handleCheckout()}>pay</button>
+          <p style={{ opacity: "0.7", letterSpacing: "3px" }}>
+            total: ${value.totalPrice}
+          </p>
+          <Button onClick={() => handleCheckout()}>pay</Button>
         </CartCont>
       ) : (
         <>

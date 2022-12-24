@@ -20,11 +20,9 @@ const ItemsCont = styled.div`
   text-align: center;
  
 }
-
-
 `
 
-export default function Items({ holiday, children }) {
+export default function Items({ children }) {
   return (
     <>
       <Banner />

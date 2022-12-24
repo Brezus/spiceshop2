@@ -1,12 +1,23 @@
-import React, { useState, createContext, useContext } from "react"
+import React, { useState, createContext, useContext, useEffect } from "react"
 import { nanoid } from "nanoid"
 
 const AppContext = createContext()
 
 export default function ShoppingCartContext({ children }) {
   const [quantity, setQuantity] = useState(1)
+  const [content, setContent] = useState("")
   const [item, setItem] = useState("")
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : []
+  )
+
+  useEffect(() => {
+    setLocalStorage()
+    console.log(JSON.parse(localStorage.getItem("cartItems")))
+  }, [cartItems])
+
   const [totalQuantity, setTotalQuantity] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
   const [openCart, setOpenCart] = useState(false)
@@ -36,6 +47,7 @@ export default function ShoppingCartContext({ children }) {
     setNewItemsQuant((prev) => prev + quantity)
     setQuantity(1)
     setNewItemAdded(true)
+    // setLocalStorage()
   }
 
   function incrementQuant(openCart = false, id) {
@@ -55,6 +67,7 @@ export default function ShoppingCartContext({ children }) {
     } else {
       setQuantity((prev) => prev + 1)
     }
+    // setLocalStorage()
   }
   function decrementQuant(openCart, id) {
     if (openCart) {
@@ -71,6 +84,7 @@ export default function ShoppingCartContext({ children }) {
           })
         }
       })
+      // setLocalStorage()
       return
     } else {
       setQuantity((prev) => (prev <= 1 ? 1 : prev - 1))
@@ -82,6 +96,7 @@ export default function ShoppingCartContext({ children }) {
         return prod._id != id
       })
     )
+    // setLocalStorage()
   }
 
   function openCt() {
@@ -91,6 +106,10 @@ export default function ShoppingCartContext({ children }) {
   }
   function closeCt() {
     setOpenCart(false)
+  }
+
+  function setLocalStorage() {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems))
   }
 
   return (
@@ -110,6 +129,7 @@ export default function ShoppingCartContext({ children }) {
         newItemAdded,
         newItemsQuant,
         totalPrice,
+        setLocalStorage,
       }}
     >
       {children}
