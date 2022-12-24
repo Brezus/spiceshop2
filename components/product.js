@@ -71,7 +71,9 @@ export default function Product({ spice }) {
   const [inCart, setInCart] = useState(false)
 
   useEffect(() => {
-    setInCart(cartItems.find((item) => (item._id === spice._id ? true : false)))
+    setInCart(
+      cartItems?.find((item) => (item._id === spice._id ? true : false))
+    )
   }, [cartItems])
 
   const stars = new Array(4)

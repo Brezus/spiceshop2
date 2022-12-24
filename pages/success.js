@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import bg from "../assets/successbg3.webp"
 
@@ -15,6 +15,10 @@ const Main = styled.main`
 `
 
 export default function success() {
+  useEffect(() => {
+    localStorage.clear()
+  }, [])
+
   return (
     <Main>
       <h1>Thank you</h1>
