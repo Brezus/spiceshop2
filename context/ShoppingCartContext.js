@@ -7,16 +7,12 @@ export default function ShoppingCartContext({ children }) {
   const [quantity, setQuantity] = useState(1)
   const [content, setContent] = useState("")
   const [item, setItem] = useState("")
-  const [cartItems, setCartItems] = useState(
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : []
-  )
+  const [cartItems, setCartItems] = useState([])
 
-  useEffect(() => {
-    setLocalStorage()
-    console.log(JSON.parse(localStorage.getItem("cartItems")))
-  }, [cartItems])
+  // useEffect(() => {
+  //   setLocalStorage()
+  //   console.log(JSON.parse(localStorage.getItem("cartItems")))
+  // }, [cartItems])
 
   const [totalQuantity, setTotalQuantity] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
