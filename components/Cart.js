@@ -126,8 +126,8 @@ export default function Cart({ items, allItems }) {
     if (response.statusCode === 500) return
 
     const data = await response.json()
-    setIsStripeLoading(false)
     stripe.redirectToCheckout({ sessionId: data.id })
+    setIsStripeLoading(false)
   }
   const cartItemsEls = items?.map((item) => {
     return (
@@ -175,7 +175,7 @@ export default function Cart({ items, allItems }) {
             total: ${value.totalPrice}
           </p>
           <Button disabled={isStripeLoading} onClick={() => handleCheckout()}>
-            {isStripeLoading ? "processing" : "pay"}
+            {isStripeLoading ? "processing..." : "pay"}
           </Button>
         </CartCont>
       ) : (

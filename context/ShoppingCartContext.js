@@ -15,7 +15,7 @@ export default function ShoppingCartContext({ children }) {
 
   useEffect(() => {
     setLocalStorage()
-    // console.log(JSON.parse(localStorage.getItem("cartItems")))
+    console.log("ran")
   }, [cartItems])
 
   const [totalQuantity, setTotalQuantity] = useState(0)
@@ -130,6 +130,10 @@ export default function ShoppingCartContext({ children }) {
         newItemsQuant,
         totalPrice,
         setLocalStorage,
+        setCartItems,
+        setTotalQuantity,
+        setTotalPrice,
+        setTotalQuantity,
       }}
     >
       {children}

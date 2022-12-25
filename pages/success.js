@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import styled from "styled-components"
 import bg from "../assets/successbg3.webp"
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 const Main = styled.main`
   background-image: url(${bg.src});
@@ -15,6 +17,7 @@ const Main = styled.main`
 `
 
 export default function Success() {
+  const router = useRouter()
   useEffect(() => {
     localStorage.clear()
   }, [])
@@ -23,7 +26,7 @@ export default function Success() {
     <Main>
       <h1>Thank you</h1>
       <span>purchase succesful c:</span>
-      <button>back to home</button>
+      <Link href={"/"}>back to home</Link>
     </Main>
   )
 }

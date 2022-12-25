@@ -11,7 +11,7 @@ import { useAppContext } from "../context/ShoppingCartContext"
 import { ref, onValue } from "firebase/database"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { database, auth } from "../utils/firebase"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 
 const H2 = styled.h2`
@@ -21,8 +21,33 @@ const H2 = styled.h2`
 
 export default function Home({ spiceProducts }) {
   const router = useRouter()
+  const [paymentSuccesful, setPaymentSuccesful] = useState(null)
   console.log(router)
-  const { cartItems, openCart } = useAppContext()
+  const {
+    cartItems,
+    openCart,
+    setCartItems,
+    setTotalPrice,
+    setTotalQuantity,
+    setQuantity,
+  } = useAppContext()
+
+  useEffect(() => {
+    if (router?.asPath === "/?success=true") {
+      localStorage.clear()
+      setCartItems([])
+      setTotalPrice(0)
+      setTotalQuantity(0)
+      setPaymentSuccesful(true)
+      router.push("/")
+    } else if (router?.asPath === "/?canceled=true") {
+      setPaymentSuccesful(false)
+      router.push("/")
+    } else {
+      setPaymentSuccesful(null)
+    }
+  }, [])
+
   const [user] = useAuthState(auth)
   const productsRendered = spiceProducts.map((prod) => (
     <Product key={prod?._id} spice={prod} />
@@ -41,6 +66,11 @@ export default function Home({ spiceProducts }) {
       <Head>
         <title>feelin spicy</title>
       </Head>
+      {paymentSuccesful ? (
+        <p style={{ color: "black" }}>hoorah</p>
+      ) : paymentSuccesful === null ? null : (
+        <p style={{ color: "black" }}>failed</p>
+      )}
       <Hero />
       <About />
       <div style={{ padding: "4em 0 6em" }} id="spices">
