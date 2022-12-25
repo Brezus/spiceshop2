@@ -22,7 +22,6 @@ const H2 = styled.h2`
 export default function Home({ spiceProducts }) {
   const router = useRouter()
   const [paymentSuccesful, setPaymentSuccesful] = useState(null)
-  console.log(router)
   const {
     cartItems,
     openCart,
@@ -36,8 +35,8 @@ export default function Home({ spiceProducts }) {
     if (router?.asPath === "/?success=true") {
       localStorage.clear()
       setCartItems([])
-      setTotalPrice(0)
-      setTotalQuantity(0)
+      // setTotalPrice(0)
+      // setTotalQuantity(0)
       setPaymentSuccesful(true)
       router.push("/")
     } else if (router?.asPath === "/?canceled=true") {

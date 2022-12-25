@@ -12,6 +12,11 @@ export default function ShoppingCartContext({ children }) {
       JSON.parse(localStorage.getItem("cartItems"))) ||
       []
   )
+  const [totalPrice, setTotalPrice] = useState(
+    (typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("total"))) ||
+      0
+  )
 
   useEffect(() => {
     setLocalStorage()
@@ -19,7 +24,6 @@ export default function ShoppingCartContext({ children }) {
   }, [cartItems])
 
   const [totalQuantity, setTotalQuantity] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
   const [openCart, setOpenCart] = useState(false)
   const [newItemAdded, setNewItemAdded] = useState(false)
   const [newItemsQuant, setNewItemsQuant] = useState(0)
@@ -110,6 +114,7 @@ export default function ShoppingCartContext({ children }) {
 
   function setLocalStorage() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems))
+    localStorage.setItem("total", JSON.stringify(totalPrice))
   }
 
   return (
