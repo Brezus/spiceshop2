@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled, { keyframes, css } from "styled-components"
 import { Button } from "../styles/spiceStyles"
 import { useAppContext } from "../context/ShoppingCartContext"
@@ -109,9 +109,11 @@ export default function Cart({ items, allItems }) {
   const value = useAppContext()
   const { cartItems } = useAppContext()
   const [user, isLoading] = useAuthState(auth)
+  const [isStripeLoading, setIsStripeLoading] = useState(false)
 
   const handleCheckout = async () => {
     const stripe = await getStripe()
+    setIsStripeLoading(true)
 
     const response = await fetch("/api/stripe", {
       method: "POST",
@@ -124,6 +126,7 @@ export default function Cart({ items, allItems }) {
     if (response.statusCode === 500) return
 
     const data = await response.json()
+    setIsStripeLoading(false)
     stripe.redirectToCheckout({ sessionId: data.id })
   }
   const cartItemsEls = items?.map((item) => {
@@ -171,7 +174,9 @@ export default function Cart({ items, allItems }) {
           <p style={{ opacity: "0.7", letterSpacing: "3px" }}>
             total: ${value.totalPrice}
           </p>
-          <Button onClick={() => handleCheckout()}>pay</Button>
+          <Button disabled={isStripeLoading} onClick={() => handleCheckout()}>
+            {isStripeLoading ? "processing" : "pay"}
+          </Button>
         </CartCont>
       ) : (
         <>

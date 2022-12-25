@@ -11,6 +11,8 @@ import { useAppContext } from "../context/ShoppingCartContext"
 import { ref, onValue } from "firebase/database"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { database, auth } from "../utils/firebase"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
 
 const H2 = styled.h2`
   color: black;
@@ -18,6 +20,8 @@ const H2 = styled.h2`
 `
 
 export default function Home({ spiceProducts }) {
+  const router = useRouter()
+  console.log(router)
   const { cartItems, openCart } = useAppContext()
   const [user] = useAuthState(auth)
   const productsRendered = spiceProducts.map((prod) => (
