@@ -13,14 +13,20 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { database, auth } from "../utils/firebase"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const H2 = styled.h2`
   color: black;
   text-align: center;
 `
+// const PayStatus = styled.p`
+
+// `
 
 export default function Home({ spiceProducts }) {
   const router = useRouter()
+
   const [paymentSuccesful, setPaymentSuccesful] = useState(null)
   const {
     cartItems,
@@ -31,21 +37,41 @@ export default function Home({ spiceProducts }) {
     setQuantity,
   } = useAppContext()
 
-  useEffect(() => {
-    if (router?.asPath === "/?success=true") {
-      localStorage.clear()
-      setCartItems([])
-      // setTotalPrice(0)
-      // setTotalQuantity(0)
-      setPaymentSuccesful(true)
-      router.push("/")
-    } else if (router?.asPath === "/?canceled=true") {
-      setPaymentSuccesful(false)
-      router.push("/")
-    } else {
-      setPaymentSuccesful(null)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (router?.asPath === "/?success=true" && router?.asPath !== "/") {
+  //     localStorage.clear()
+  //     setCartItems([])
+  //     setTotalPrice(0)
+  //     // setTotalQuantity(0)
+  //     setPaymentSuccesful(true)
+  //     // toast.success("🙃 payment succesful", {
+  //     //   position: "top-right",
+  //     //   autoClose: 3000,
+  //     //   hideProgressBar: false,
+  //     //   closeOnClick: true,
+  //     //   pauseOnHover: true,
+  //     //   draggable: true,
+  //     //   progress: undefined,
+  //     //   theme: "colored",
+  //     // })
+  //     router.push("/")
+  //   } else if (router?.asPath === "/?canceled=true" && router?.asPath !== "/") {
+  //     setPaymentSuccesful(false)
+  //     // toast.error("payment cancelled", {
+  //     //   position: "top-right",
+  //     //   autoClose: 3000,
+  //     //   hideProgressBar: false,
+  //     //   closeOnClick: true,
+  //     //   pauseOnHover: true,
+  //     //   draggable: true,
+  //     //   progress: undefined,
+  //     //   theme: "colored",
+  //     // })
+  //     router.push("/")
+  //   } else {
+  //     setPaymentSuccesful(null)
+  //   }
+  // }, [])
 
   const [user] = useAuthState(auth)
   const productsRendered = spiceProducts.map((prod) => (
@@ -65,11 +91,12 @@ export default function Home({ spiceProducts }) {
       <Head>
         <title>feelin spicy</title>
       </Head>
-      {paymentSuccesful ? (
+      {/* {paymentSuccesful ? (
         <p style={{ color: "black" }}>hoorah</p>
       ) : paymentSuccesful === null ? null : (
         <p style={{ color: "black" }}>failed</p>
-      )}
+      )} */}
+      <ToastContainer />
       <Hero />
       <About />
       <div style={{ padding: "4em 0 6em" }} id="spices">

@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react"
 import { nanoid } from "nanoid"
+import { toast } from "react-toastify"
 
 const AppContext = createContext()
 
@@ -20,7 +21,6 @@ export default function ShoppingCartContext({ children }) {
 
   useEffect(() => {
     setLocalStorage()
-    console.log("ran")
   }, [cartItems])
 
   const [totalQuantity, setTotalQuantity] = useState(0)
@@ -51,6 +51,7 @@ export default function ShoppingCartContext({ children }) {
     setNewItemsQuant((prev) => prev + quantity)
     setQuantity(1)
     setNewItemAdded(true)
+    toast("successfully added to cart")
     // setLocalStorage()
   }
 

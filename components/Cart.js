@@ -80,9 +80,12 @@ const CartBg = styled.div`
 const Item = styled.div`
   display: flex;
   gap: 1em;
-  width: 70%;
+  width: 100%;
   display: grid;
   grid-template-columns: 35px 1fr;
+  @media (min-width: 375px) {
+    width: 70%;
+  }
 `
 const Desc = styled.div`
   display: flex;
