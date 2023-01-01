@@ -1,6 +1,18 @@
 import { Html, Head, Main, NextScript } from "next/document"
+import { renderToString } from "react-dom/server"
+import { ServerStyleSheet } from "styled-components"
 
 export default function Document() {
+  const sheet = new ServerStyleSheet()
+  try {
+    const html = renderToString(sheet.collectStyles(<YourApp />))
+    const styleTags = sheet.getStyleTags() // or sheet.getStyleElement();
+  } catch (error) {
+    // handle error
+    console.error(error)
+  } finally {
+    sheet.seal()
+  }
   return (
     <Html>
       <Head>
