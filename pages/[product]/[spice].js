@@ -20,6 +20,7 @@ import { useAppContext } from "../../context/ShoppingCartContext"
 import Cart from "../../components/Cart"
 import { TiShoppingCart } from "react-icons/ti"
 import { createGlobalStyle } from "styled-components"
+import { montserrat, raleway } from "../_app"
 
 const GlobalStyle = createGlobalStyle`
   body {

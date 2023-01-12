@@ -12,6 +12,7 @@ import {
 import { auth } from "../../utils/firebase"
 import { useRouter } from "next/router"
 import { useSignInWithGoogle } from "react-firebase-hooks/auth"
+import { raleway } from "../_app"
 
 const LoginCont = styled.main`
   height: 100vh;
@@ -19,7 +20,7 @@ const LoginCont = styled.main`
   justify-content: center;
   color: black;
   text-align: center;
-  font-family: ${({ theme }) => theme.ffM};
+  // font-family: ${({ theme }) => theme.ffM};
 `
 
 const LoginMain = styled.div`
@@ -107,7 +108,7 @@ export default function Login() {
   }
 
   return (
-    <LoginCont>
+    <LoginCont className={`${raleway.className}`}>
       <LoginMain>
         <h1>Log in to your account</h1>
         <p>login using one of these providers</p>

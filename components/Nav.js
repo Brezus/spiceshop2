@@ -10,6 +10,7 @@ import Cart from "./Cart"
 import { createGlobalStyle } from "styled-components"
 import { auth, signOut } from "../utils/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
+import { raleway } from "../pages/_app"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -35,7 +36,7 @@ const Navigation = styled.nav`
   margin-inline: auto;
   padding-inline: 1em;
   border-radius: ${({ theme }) => theme.bRadius};
-  font-family: ${({ theme }) => theme.ffM};
+  // font-family: ${({ theme }) => theme.ffM};
   z-index: 5;
   }
 `
@@ -205,7 +206,7 @@ export default function Nav() {
   const chevronContStyles = { zIndex: "2" }
 
   const homeNavigation = (
-    <Navigation>
+    <Navigation className={`${raleway.className}`}>
       <Atag href={"/"}>
         <H1>feelin spicy</H1>
       </Atag>

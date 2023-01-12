@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import chef from "../assets/chef.jpg"
 import spice from "../assets/spice-jar1.jpg"
+import { raleway } from "../pages/_app"
 
 const HeroDiv = styled.div`
   background-image: url(${chef.src});
@@ -11,7 +12,7 @@ const HeroDiv = styled.div`
   background-position: center bottom;
   min-height: 100vh;
   width: 100%;
-  font-family: ${({ theme }) => theme.ffM};
+  // font-family: ${({ theme }) => theme.ffM};
   padding-bottom: 2em;
 `
 
@@ -71,7 +72,7 @@ const Button = styled.button`
 export default function Hero() {
   const styles = { display: "flex", flexDirection: "column", gap: "1em" }
   return (
-    <HeroDiv>
+    <HeroDiv className={`${raleway.className}`}>
       <HeroText>
         <div style={styles}>
           <h1>Spice It Up</h1>
